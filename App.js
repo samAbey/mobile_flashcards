@@ -2,28 +2,10 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import FCStatusBar  from './components/statusbar/statusbar';
 import { TabNavigator } from 'react-navigation';
+import AddDeck from './components/add-decks/add-decks';
+import Decks from './components/decks/decks'
 
-class Decks extends React.Component {
 
-  render () {
-    return (
-      <View>
-        <Text>Decks</Text>
-      </View>
-    )
-  }
-}
-
-class AddDeck extends React.Component {
-
-  render () {
-    return (
-      <View>
-        <Text>Add Dec</Text>
-      </View>
-    )
-  }
-}
 
 const Tabs = TabNavigator ({
   Decks: {
