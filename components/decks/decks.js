@@ -28,7 +28,6 @@ class Decks extends React.Component {
             value? this.props.getAllDecks(JSON.parse(value)):null;
         }).done();
     }
-
     
     render () {
 
@@ -44,28 +43,20 @@ class Decks extends React.Component {
             })
         });
 
-
-
         const renderItems = ({item}) => {
 
             const 
                 value = item.key,
                 questions = decks[value].questions;
             
-            return <View style={{height: 300}}>
+            return <View>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate (
                     'Card',
                     {id: value}
                 )}>
-                    <View>
+                    <View style={styles.deckPanel}>
                         <Text>{value}</Text>
-                    </View>
-                    <View>
-                        <Text>
-                            {questions.map((question, index) => {
-                                return <Text key={index}>{question.question}</Text>
-                            })}
-                        </Text>
+                        <Text>{questions.length} Cards</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -110,6 +101,13 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    deckPanel: {
+        height: 300, 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        borderBottomWidth: 1, 
+        borderBottomColor: '#b7b7b7'
     }
 })
     
