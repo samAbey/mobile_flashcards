@@ -18,7 +18,13 @@ class Deck extends React.Component {
             <View style={styles.container}>
                 <Text style={styles.deckTitle}>{deckName}</Text>
                 <Text>{deck.questions.length} Cards</Text>
-                <TouchableOpacity style={styles.addCardbutton}>
+                <TouchableOpacity 
+                    style={styles.addCardbutton}
+                    onPress={() => this.props.navigation.navigate(
+                        'AddCard',
+                        {deck, deckName}
+                    )}
+                >
                     <Text>Add Card</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.startbutton}>

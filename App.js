@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import reducers from './redux/reducers';
 import thunk from 'redux-thunk';
 import Deck from './components/deck/deck';
+import AddCard from './components/add-card/add-card';
 
 
 import { DECK_KEY, setUpAsyncStorage } from './utils/helpers';
@@ -38,6 +39,9 @@ const MainNavigator = StackNavigator ({
   },
   Deck: {
     screen: Deck
+  },
+  AddCard: {
+    screen: AddCard
   }
 
 })
