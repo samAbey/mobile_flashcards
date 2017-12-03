@@ -10,7 +10,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import reducers from './redux/reducers';
 import thunk from 'redux-thunk';
-import Card from './components/card/card';
+import Deck from './components/deck/deck';
 
 
 import { DECK_KEY, setUpAsyncStorage } from './utils/helpers';
@@ -36,8 +36,8 @@ const MainNavigator = StackNavigator ({
       header: null,
     }),
   },
-  Card: {
-    screen: Card
+  Deck: {
+    screen: Deck
   }
 
 })

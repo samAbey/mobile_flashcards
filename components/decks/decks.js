@@ -51,7 +51,7 @@ class Decks extends React.Component {
             
             return <View>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate (
-                    'Card',
+                    'Deck',
                     {id: value}
                 )}>
                     <View style={styles.deckPanel}>
@@ -69,7 +69,7 @@ class Decks extends React.Component {
                         ?<FlatList data={deckItems} renderItem={renderItems}/>
                         :<View style={styles.noDecks}>
                             <Entypo name="emoji-sad" size={32}/>
-                            <Text>No Decks Availables</Text>
+                            <Text style={styles.deckTitle}>No Decks Availables</Text>
                         </View>
                 }
             </View>
@@ -108,6 +108,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center', 
         borderBottomWidth: 1, 
         borderBottomColor: '#b7b7b7'
+    },
+    deckTitle: {
+        fontSize: 22,
+        fontWeight: 'bold'
     }
 })
     
