@@ -9,6 +9,10 @@ import {
     AsyncStorage
 } from 'react-native';
 
+import { connect } from 'react-redux';
+
+import { getAllDecks } from '../../redux/actions/decks';
+
 import { DECK_KEY } from '../../utils/helpers'
 
 class AddDecks extends React.Component {
@@ -41,16 +45,18 @@ class AddDecks extends React.Component {
                         [this.state.deckName]: {}
                     }), () => {
                         AsyncStorage.getItem(DECK_KEY).then((value) => {
-                            console.log(value);
+                            this.props.getAllDecks(value)
                         }).done();
                         this.setState({deckAlreadyExsists: false, deckName: ""});
                     });
+
+
                 } else if (value == null) {
                     AsyncStorage.setItem(DECK_KEY, JSON.stringify({
                         [this.state.deckName]: {}
                     }), () => {
                         AsyncStorage.getItem(DECK_KEY).then((value) => {
-                            console.log('Item added,', value);
+                            this.props.getAllDecks(value)
                         }).done();
                         this.setState({deckAlreadyExsists: false, deckName: ""});
                     });
@@ -78,7 +84,19 @@ class AddDecks extends React.Component {
     }
 }
 
-export default AddDecks;
+const mapStateToProps = ({decks}) => {
+    return {
+        decks
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        getAllDecks: (value) => {dispatch(getAllDecks(value))}
+    }
+}
+
+export default connect (mapStateToProps, mapDispatchToProps) (AddDecks);
 
 const styles = StyleSheet.create({
     container: {

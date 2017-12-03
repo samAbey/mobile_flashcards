@@ -7,8 +7,10 @@ import {
     StyleSheet
 } from 'react-native';
 
-import { Entypo } from '@expo/vector-icons';
+import { connect } from 'react-redux';
+import { getAllDecks } from '../../redux/actions/decks';
 
+import { Entypo } from '@expo/vector-icons';
 import { DECK_KEY } from '../../utils/helpers';
 
 class Decks extends React.Component {
@@ -18,7 +20,6 @@ class Decks extends React.Component {
     }
 
     componentDidMount () {
-
         AsyncStorage.getItem(DECK_KEY, (value) => {
             if (value) {
                 this.setState({
@@ -32,10 +33,15 @@ class Decks extends React.Component {
         }).done();
     }
 
+    componentWillReceiveProps (nextProps) {
+        console.log(nextProps)
+    }
+
     
     render () {
 
-        const {decks} = this.state
+        const {decks} = this.state;
+        
         return (
             <View style={styles.container}>
                 { 
@@ -54,7 +60,19 @@ class Decks extends React.Component {
     }
 }
 
-export default Decks;
+const mapStateToProps = ({decks}) => {
+    return {
+        decks
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        getAllDecks: () => {dispatch(getAllDecks())}
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (Decks);
 
 const styles = StyleSheet.create({
     container: {

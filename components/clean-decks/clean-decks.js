@@ -12,7 +12,6 @@ class CleanDecks extends React.Component {
     deleteAllDecks = () => {
         AsyncStorage.removeItem(DECK_KEY, () => {
             AsyncStorage.getItem(DECK_KEY).then(function (value) {
-                console.log (value)
             }) 
         });
     }
