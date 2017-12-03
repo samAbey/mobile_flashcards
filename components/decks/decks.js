@@ -55,7 +55,7 @@ class Decks extends React.Component {
                     {deckName: value, deck: decks[value]}
                 )}>
                     <View style={styles.deckPanel}>
-                        <Text>{value}</Text>
+                        <Text style={styles.deckTitle}>{value}</Text>
                         <Text>{questions.length} Cards</Text>
                     </View>
                 </TouchableOpacity>
