@@ -9,20 +9,13 @@ import {
     FlatList
 } from 'react-native';
 
-import { StackNavigator } from 'react-navigation';
 
 import { connect } from 'react-redux';
 import { getAllDecks } from '../../redux/actions/decks';
 
 import { Entypo } from '@expo/vector-icons';
 import { DECK_KEY } from '../../utils/helpers';
-import Card from '../card/card';
 
-const Cards = StackNavigator ({
-    Card: {
-        screen: Card
-    }
-})
 
 class Decks extends React.Component {
 
@@ -52,22 +45,26 @@ class Decks extends React.Component {
         });
 
 
-        console.log('deckItems', deckItems)
 
         const renderItems = ({item}) => {
 
-            value = item.key
+            const 
+                value = item.key,
+                questions = decks[value].questions;
             
             return <View style={{height: 300}}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate (
+                    'Card',
+                    {id: value}
+                )}>
                     <View>
                         <Text>{value}</Text>
                     </View>
                     <View>
                         <Text>
-                            {decks[value].questions?decks[value].questions.map((question, index) => {
-                                return <Text>{question}</Text>
-                            }):null}
+                            {questions.map((question, index) => {
+                                return <Text key={index}>{question.question}</Text>
+                            })}
                         </Text>
                     </View>
                 </TouchableOpacity>

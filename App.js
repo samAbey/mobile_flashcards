@@ -1,15 +1,16 @@
 import React from 'react';
 import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
 import FCStatusBar  from './components/statusbar/statusbar';
-import { TabNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator } from 'react-navigation';
 import AddDeck from './components/add-decks/add-decks';
 import Decks from './components/decks/decks';
-import cleanDecks from './components/clean-decks/clean-decks';
+import CleanDecks from './components/clean-decks/clean-decks';
 
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import reducers from './redux/reducers';
 import thunk from 'redux-thunk';
+import Card from './components/card/card';
 
 
 import { DECK_KEY, setUpAsyncStorage } from './utils/helpers';
@@ -23,10 +24,23 @@ const Tabs = TabNavigator ({
   AddDeck: {
     screen: AddDeck
   },
-  cleanDecks: {
-    screen: cleanDecks
+  CleanDecks: {
+    screen: CleanDecks
   }
 });
+
+const MainNavigator = StackNavigator ({
+  Tabs: {
+    screen: Tabs,
+    navigationOptions: ({ navigation }) => ({
+      header: null,
+    }),
+  },
+  Card: {
+    screen: Card
+  }
+
+})
 
 const store = createStore(reducers, applyMiddleware(thunk))
 
@@ -39,7 +53,7 @@ export default class App extends React.Component {
       <Provider store={store}>
         <View style={styles.container}>
           <FCStatusBar/>
-          <Tabs />
+          <MainNavigator />
         </View>
       </Provider>
     )
