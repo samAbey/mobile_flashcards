@@ -5,7 +5,8 @@ import {
     AsyncStorage,
     Button,
     StyleSheet,
-    TouchableOpacity
+    TouchableOpacity,
+    FlatList
 } from 'react-native';
 
 import { StackNavigator } from 'react-navigation';
@@ -29,10 +30,6 @@ class Decks extends React.Component {
         decks: null
     }
 
-    showCards = () => {
-        console.log('cards')
-    }
-
     componentDidMount () {
         AsyncStorage.getItem(DECK_KEY).then((value) => {
             value? this.props.getAllDecks(JSON.parse(value)):null;
@@ -44,36 +41,48 @@ class Decks extends React.Component {
 
         const {decks} = this.props.decks;
 
+
+        const deckItems = []
         
+        Object.keys(decks).forEach((item, index)=> {
+            deckItems.push({
+                key: item,
+                value: item
+            })
+        });
+
+
+        console.log('deckItems', deckItems)
+
+        const renderItems = ({item}) => {
+
+            value = item.key
+            
+            return <View style={{height: 300}}>
+                <TouchableOpacity>
+                    <View>
+                        <Text>{value}</Text>
+                    </View>
+                    <View>
+                        <Text>
+                            {decks[value].questions?decks[value].questions.map((question, index) => {
+                                return <Text>{question}</Text>
+                            }):null}
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
+        }
+
         return (
             <View style={styles.container}>
                 { 
-                Object.keys(decks).length?
-
-                    Object.keys(decks).map((value, index) => {
-                        return (
-                            <View key={index}>
-                                <TouchableOpacity onPress={this.showCards}>
-                                    <View>
-                                        <Text>{value}</Text>
-                                    </View>
-                                    <View>
-                                        <Text>
-                                            {decks[value].questions.map((question, index) => {
-                                                return <Text>{question}</Text>
-                                            })}
-                                        </Text>
-                                    </View>
-                                </TouchableOpacity>
-                            </View>
-                        );
-                    })
-                    
-                :
-                    <View style={styles.noDecks}>
-                        <Entypo name="emoji-sad" size={32}/>
-                        <Text>No Decks Availables</Text>
-                    </View>
+                    Object.keys(decks).length
+                        ?<FlatList data={deckItems} renderItem={renderItems}/>
+                        :<View style={styles.noDecks}>
+                            <Entypo name="emoji-sad" size={32}/>
+                            <Text>No Decks Availables</Text>
+                        </View>
                 }
             </View>
         )
@@ -103,7 +112,7 @@ const styles = StyleSheet.create({
     noDecks: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'center'
     }
 })
     

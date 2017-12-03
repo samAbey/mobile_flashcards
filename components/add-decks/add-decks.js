@@ -43,7 +43,7 @@ class AddDecks extends React.Component {
                     
                     AsyncStorage.mergeItem(DECK_KEY, JSON.stringify({
                         [this.state.deckName]: {
-                            question: []
+                            questions: []
                         }
                     }), () => {
                         AsyncStorage.getItem(DECK_KEY).then((value) => {
