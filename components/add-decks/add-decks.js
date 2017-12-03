@@ -42,10 +42,12 @@ class AddDecks extends React.Component {
                 if (value && JSON.parse(value) && !JSON.parse(value)[deckName]) {
                     
                     AsyncStorage.mergeItem(DECK_KEY, JSON.stringify({
-                        [this.state.deckName]: {}
+                        [this.state.deckName]: {
+                            question: []
+                        }
                     }), () => {
                         AsyncStorage.getItem(DECK_KEY).then((value) => {
-                            this.props.getAllDecks(value)
+                            this.props.getAllDecks(JSON.parse(value));
                         }).done();
                         this.setState({deckAlreadyExsists: false, deckName: ""});
                     });
@@ -53,10 +55,12 @@ class AddDecks extends React.Component {
 
                 } else if (value == null) {
                     AsyncStorage.setItem(DECK_KEY, JSON.stringify({
-                        [this.state.deckName]: {}
+                        [this.state.deckName]: {
+                            questions: []
+                        }
                     }), () => {
                         AsyncStorage.getItem(DECK_KEY).then((value) => {
-                            this.props.getAllDecks(value)
+                            this.props.getAllDecks(JSON.parse(value))
                         }).done();
                         this.setState({deckAlreadyExsists: false, deckName: ""});
                     });
@@ -67,6 +71,8 @@ class AddDecks extends React.Component {
             
         }
     }
+
+    
 
     render () {
         return (

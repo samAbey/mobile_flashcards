@@ -1,0 +1,2 @@
+export const RECEIVING_DECKS = 'RECEIVING_DECKS';
+export const DECKS_RECEIVED = 'DECKS_RECEIVED';

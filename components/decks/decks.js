@@ -4,14 +4,24 @@ import {
     Text, 
     AsyncStorage,
     Button,
-    StyleSheet
+    StyleSheet,
+    TouchableOpacity
 } from 'react-native';
+
+import { StackNavigator } from 'react-navigation';
 
 import { connect } from 'react-redux';
 import { getAllDecks } from '../../redux/actions/decks';
 
 import { Entypo } from '@expo/vector-icons';
 import { DECK_KEY } from '../../utils/helpers';
+import Card from '../card/card';
+
+const Cards = StackNavigator ({
+    Card: {
+        screen: Card
+    }
+})
 
 class Decks extends React.Component {
 
@@ -19,36 +29,46 @@ class Decks extends React.Component {
         decks: null
     }
 
-    componentDidMount () {
-        AsyncStorage.getItem(DECK_KEY, (value) => {
-            if (value) {
-                this.setState({
-                    decks: value
-                })
-            } else {
-                this.setState({
-                    decks: null
-                })
-            }
-        }).done();
+    showCards = () => {
+        console.log('cards')
     }
 
-    componentWillReceiveProps (nextProps) {
-        console.log(nextProps)
+    componentDidMount () {
+        AsyncStorage.getItem(DECK_KEY).then((value) => {
+            value? this.props.getAllDecks(JSON.parse(value)):null;
+        }).done();
     }
 
     
     render () {
 
-        const {decks} = this.state;
+        const {decks} = this.props.decks;
+
         
         return (
             <View style={styles.container}>
                 { 
-                decks?
-                    <View>
-                        <Text>Decks available</Text>
-                    </View>
+                Object.keys(decks).length?
+
+                    Object.keys(decks).map((value, index) => {
+                        return (
+                            <View key={index}>
+                                <TouchableOpacity onPress={this.showCards}>
+                                    <View>
+                                        <Text>{value}</Text>
+                                    </View>
+                                    <View>
+                                        <Text>
+                                            {decks[value].questions.map((question, index) => {
+                                                return <Text>{question}</Text>
+                                            })}
+                                        </Text>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+                        );
+                    })
+                    
                 :
                     <View style={styles.noDecks}>
                         <Entypo name="emoji-sad" size={32}/>
@@ -60,15 +80,17 @@ class Decks extends React.Component {
     }
 }
 
-const mapStateToProps = ({decks}) => {
+const mapStateToProps = (state) => {
+    const { decks } = state;
+
     return {
-        decks
+        decks: state
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        getAllDecks: () => {dispatch(getAllDecks())}
+        getAllDecks: (value) => {dispatch(getAllDecks(value))}
     }
 }
 
