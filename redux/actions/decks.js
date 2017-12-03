@@ -4,7 +4,6 @@ import { RECEIVING_DECKS, DECKS_RECEIVED }from '../action-types';
 
 export const getAllDecks = (value) => {
 
-
     return dispatch => {
         dispatch({
             type: RECEIVING_DECKS

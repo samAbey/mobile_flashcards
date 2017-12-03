@@ -7,13 +7,21 @@ import {
     TouchableOpacity } from 'react-native';
 import { DECK_KEY } from '../../utils/helpers';
 
+import { getAllDecks } from '../../redux/actions/decks';
+import { connect } from 'react-redux';
+
 class CleanDecks extends React.Component {
 
+    
+
     deleteAllDecks = () => {
+        const {getAllDecks} = this.props;
         AsyncStorage.removeItem(DECK_KEY, () => {
             AsyncStorage.getItem(DECK_KEY).then(function (value) {
-            }) 
-        });
+                console.log(value)
+                getAllDecks({});
+            }).done();
+        }).done();
     }
 
     render () {
@@ -27,7 +35,13 @@ class CleanDecks extends React.Component {
     }
 }
 
-export default CleanDecks;
+mapDispatchToProps = (dispatch) => {
+    return {
+        getAllDecks: items => dispatch(getAllDecks(items))
+    }
+}
+
+export default connect(null, mapDispatchToProps) (CleanDecks);
 
 const styles = StyleSheet.create({
     container: {
@@ -46,4 +60,5 @@ const styles = StyleSheet.create({
         color: '#fff'
     }
 });
+
 
