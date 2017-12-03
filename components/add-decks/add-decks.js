@@ -43,8 +43,8 @@ class AddDecks extends React.Component {
                         AsyncStorage.getItem(DECK_KEY).then((value) => {
                             console.log(value);
                         }).done();
-                        this.setState({deckAlreadyExsists: false});
-                    })
+                        this.setState({deckAlreadyExsists: false, deckName: ""});
+                    });
                 } else if (value == null) {
                     AsyncStorage.setItem(DECK_KEY, JSON.stringify({
                         [this.state.deckName]: {}
@@ -52,7 +52,7 @@ class AddDecks extends React.Component {
                         AsyncStorage.getItem(DECK_KEY).then((value) => {
                             console.log('Item added,', value);
                         }).done();
-                        this.setState({deckAlreadyExsists: false});
+                        this.setState({deckAlreadyExsists: false, deckName: ""});
                     });
                 } else {
                     this.setState({deckAlreadyExsists: true})
@@ -63,11 +63,10 @@ class AddDecks extends React.Component {
     }
 
     render () {
-        console.log(this.state.deckAlreadyExsists)
         return (
             <View style={styles.container}>
                 <Text>What is the title of your new Deck</Text>
-                <TextInput style={styles.inputBox} onChangeText={this.onChange}/>
+                <TextInput style={styles.inputBox} onChangeText={this.onChange} value={this.state.deckName}/>
                 <TouchableOpacity style={styles.addDeskButton} onPress={this.addDeck}>
                     <Text>Add Deck</Text>
                 </TouchableOpacity>
