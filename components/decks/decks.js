@@ -52,7 +52,7 @@ class Decks extends React.Component {
             return <View>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate (
                     'Deck',
-                    {id: value}
+                    {deckName: value, deck: decks[value]}
                 )}>
                     <View style={styles.deckPanel}>
                         <Text>{value}</Text>
