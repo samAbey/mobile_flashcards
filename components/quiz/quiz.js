@@ -43,7 +43,8 @@ class Quiz extends React.Component {
             !this.state.showScore?<View>
                 <Card nextQuestion={this.nextQuestion} question={this.state.currentQuestion}></Card>
             </View>:<View>
-                <Text>{this.state.score} of {this.state.questions.length}</Text>
+                <Text>Score</Text>
+                <Text>{this.state.score} / {this.state.questions.length}</Text>
             </View>
         );
     }

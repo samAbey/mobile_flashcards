@@ -10,7 +10,9 @@ import { connect } from 'react-redux';
 
 class Deck extends React.Component {
 
-    
+    static navigationOptions = ({navigation}) => ({
+        title: navigation.state.params.deckName
+    });
 
     render () {
 
