@@ -8,12 +8,10 @@ import {
     TouchableOpacity,
     AsyncStorage
 } from 'react-native';
-
 import { connect } from 'react-redux';
-
 import { getAllDecks } from '../../redux/actions/decks';
-
-import { DECK_KEY } from '../../utils/helpers'
+import { DECK_KEY } from '../../utils/helpers';
+import { NavigationActions } from 'react-navigation';
 
 class AddDecks extends React.Component {
 
@@ -50,6 +48,7 @@ class AddDecks extends React.Component {
                             this.props.getAllDecks(JSON.parse(value));
                         }).done();
                         this.setState({deckAlreadyExsists: false, deckName: ""});
+                        this.props.navigation.dispatch(NavigationActions.back())
                     });
 
 
@@ -63,6 +62,7 @@ class AddDecks extends React.Component {
                             this.props.getAllDecks(JSON.parse(value))
                         }).done();
                         this.setState({deckAlreadyExsists: false, deckName: ""});
+                        this.props.navigation.dispatch(NavigationActions.back())
                     });
                 } else {
                     this.setState({deckAlreadyExsists: true})
@@ -70,6 +70,7 @@ class AddDecks extends React.Component {
             }).done();
             
         }
+        
     }
 
     

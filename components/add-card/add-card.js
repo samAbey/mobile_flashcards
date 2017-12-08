@@ -21,10 +21,6 @@ class AddCard extends React.Component {
         answerText: ''
     }
 
-    componentDidMount () {
-        //console.log(this.props.navigation.state.params.deck, this.props.decks)
-    }
-
     handleQuestionChange = (text) => {
         this.setState ({
             questionText: text
