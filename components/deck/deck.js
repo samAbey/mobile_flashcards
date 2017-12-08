@@ -14,8 +14,8 @@ class Deck extends React.Component {
 
     render () {
 
-        //TODO: get deck from redux store
-        const { deck, deckName } = this.props.navigation.state.params;
+        const { deckName } = this.props.navigation.state.params;
+        const deck = this.props.decks[deckName];
 
         return (
             <View style={styles.container}>
@@ -30,7 +30,10 @@ class Deck extends React.Component {
                 >
                     <Text>Add Card</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.startbutton}>
+                <TouchableOpacity style={styles.startbutton} onPress={() => this.props.navigation.navigate(
+                    'Quiz',
+                    {deck}
+                )}>
                     <Text style={styles.startButtonText}>Start Quiz</Text>
                 </TouchableOpacity>
             </View>
