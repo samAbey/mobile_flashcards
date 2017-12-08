@@ -12,6 +12,7 @@ import { DECK_KEY } from '../../utils/helpers';
 
 import { connect } from 'react-redux';
 import { getAllDecks } from '../../redux/actions/decks';
+import { NavigationActions } from 'react-navigation';
 
 class AddCard extends React.Component {
 
@@ -44,13 +45,13 @@ class AddCard extends React.Component {
             answer: this.state.answerText
         });
 
-        console.log(questions)
-
         AsyncStorage.mergeItem(DECK_KEY, JSON.stringify({
             [this.props.navigation.state.params.deckName]: {
                 questions
             }
-        })).done();
+        })).then(() => {
+            this.props.navigation.dispatch(NavigationActions.back())
+        }).done();
 
         AsyncStorage.getItem(DECK_KEY).then((value) => {
             this.props.getAllDecks(JSON.parse(value))

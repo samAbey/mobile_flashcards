@@ -6,12 +6,15 @@ import {
     TouchableOpacity
 } from 'react-native';
 
+import { connect } from 'react-redux';
+
 class Deck extends React.Component {
 
     
 
     render () {
 
+        //TODO: get deck from redux store
         const { deck, deckName } = this.props.navigation.state.params;
 
         return (
@@ -35,7 +38,7 @@ class Deck extends React.Component {
     }
 }
 
-export default Deck;
+export default connect (({decks})=>({decks}), null)(Deck);
 
 const styles = StyleSheet.create({
     container: {
