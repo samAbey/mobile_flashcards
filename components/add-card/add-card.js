@@ -1,6 +1,7 @@
 import React from 'react';
 import { 
     View, 
+    KeyboardAvoidingView,
     Text,
     StyleSheet,
     TouchableOpacity,
@@ -63,8 +64,9 @@ class AddCard extends React.Component {
         return (
             <View style={styles.container}>
                 <Text>Question</Text>
-                <TextInput style={styles.inputBox} onChangeText={this.handleQuestionChange} value={this.state.questionText}/>
-
+                <KeyboardAvoidingView>
+                    <TextInput style={styles.inputBox} onChangeText={this.handleQuestionChange} value={this.state.questionText}/>
+                </KeyboardAvoidingView>
                 <Text>Answer</Text>
                 <TextInput style={styles.inputBox} onChangeText={this.handleAnswerChange} value={this.state.answerText}/>
 

@@ -18,8 +18,6 @@ class Deck extends React.Component {
 
         const { deckName, deck } = this.props.navigation.state.params;
 
-        console.log('---->', deck)
-
         return (
             <View style={styles.container}>
                 <Text style={styles.deckTitle}>{deckName}</Text>

@@ -3,7 +3,7 @@ import {
     View, 
     Text, 
     TextInput, 
-    i, 
+    KeyboardAvoidingView, 
     StyleSheet,
     TouchableOpacity,
     AsyncStorage
@@ -96,7 +96,9 @@ class AddDecks extends React.Component {
         return (
             <View style={styles.container}>
                 <Text>What is the title of your new Deck</Text>
-                <TextInput style={styles.inputBox} onChangeText={this.onChange} value={this.state.deckName}/>
+                <KeyboardAvoidingView>
+                    <TextInput style={styles.inputBox} onChangeText={this.onChange} value={this.state.deckName}/>
+                </KeyboardAvoidingView>
                 <TouchableOpacity style={styles.addDeskButton} onPress={this.addDeck}>
                     <Text>Add Deck</Text>
                 </TouchableOpacity>
