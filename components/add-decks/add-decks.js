@@ -31,7 +31,6 @@ class AddDecks extends React.Component {
         })
     }
 
-
     addDeck = () => {
 
         const {deckName} = this.state;
@@ -89,8 +88,6 @@ class AddDecks extends React.Component {
         }
         
     }
-
-    
 
     render () {
         return (
