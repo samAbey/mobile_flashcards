@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
-#### App has been tested on Samsung Galaxy S8+ (with expo)
+#### tested on Samsung Galaxy S8+ (with expo)
 
 
 ### dependencies
