@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Card from './card';
 import { clearLocalNotification,setLocalNotification } from '../../utils/helpers';
+import { NavigationActions } from 'react-navigation';
 
 class Quiz extends React.Component {
 
@@ -41,6 +42,16 @@ class Quiz extends React.Component {
 
     }
 
+    startOver = () => {
+        this.setState({
+            questions: this.props.navigation.state.params.deck.questions,
+            currentQuestion: this.props.navigation.state.params.deck.questions[0],
+            currentQuestionIndex: 0,
+            score: 0,
+            showScore: false
+        })
+    }
+
     render () {
 
         const {deck} = this.props.navigation.state.params;
@@ -54,6 +65,16 @@ class Quiz extends React.Component {
                 <Text style={styles.scoreText}>Score</Text>
                 <Text>{this.state.score} / {this.state.questions.length} corect answers</Text>
                 <Text>Score: {(this.state.score / this.state.questions.length)*100}%</Text>
+
+                <TouchableOpacity style={styles.btn} onPress={this.startOver}>
+                    <Text>Quiz me back</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.btn} onPress={() => {
+                        this.props.navigation.dispatch(NavigationActions.back())
+                }}>
+                    <Text>Go to the deck</Text>
+                </TouchableOpacity>
             </View>
         );
     }
@@ -73,5 +94,14 @@ const styles = StyleSheet.create({
     },
     numberOfCards: {
        marginTop: 20 
-    }
+    },
+    btn: {
+        backgroundColor: '#DDDDDD',
+        paddingTop: 20,
+        paddingRight: 50,
+        paddingBottom: 20,
+        paddingLeft: 50,
+        marginBottom: 20,
+        marginTop: 20
+    },
 });
