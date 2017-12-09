@@ -16,8 +16,9 @@ class Deck extends React.Component {
 
     render () {
 
-        const { deckName } = this.props.navigation.state.params;
-        const deck = this.props.decks[deckName];
+        const { deckName, deck } = this.props.navigation.state.params;
+
+        console.log('---->', deck)
 
         return (
             <View style={styles.container}>

@@ -31,6 +31,7 @@ class AddDecks extends React.Component {
         })
     }
 
+
     addDeck = () => {
 
         const {deckName} = this.state;
@@ -51,8 +52,14 @@ class AddDecks extends React.Component {
                         AsyncStorage.getItem(DECK_KEY).then((value) => {
                             this.props.getAllDecks(JSON.parse(value));
                         }).done();
+
                         this.setState({deckAlreadyExsists: false, deckName: ""});
-                        this.props.navigation.dispatch(NavigationActions.back())
+
+                        this.props.navigation.navigate (
+                            'Deck',
+                            { deckName: deckName,deck: { questions: [] } }
+                        )
+                        
                     });
 
 
@@ -66,7 +73,13 @@ class AddDecks extends React.Component {
                             this.props.getAllDecks(JSON.parse(value))
                         }).done();
                         this.setState({deckAlreadyExsists: false, deckName: ""});
-                        this.props.navigation.dispatch(NavigationActions.back())
+                        this.props.navigation.navigate (
+                            'Deck',
+                            { deckName: deckName,deck: { questions: [] } }
+                        )
+
+                        
+                        
                     });
                 } else {
                     this.setState({deckAlreadyExsists: true})
