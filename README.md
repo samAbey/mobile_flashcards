@@ -18,5 +18,5 @@ This project was bootstrapped with [Create React Native App](https://github.com/
 ### Instructions to start the project
 
   * Clone repo `git clone https://github.com/samAbey/mobile_flashcards.git`
-  * CD into Project folder and Install all the dependencies `yarn add`
+  * CD into Project folder and Install all the dependencies `yarn install`
   * Start project `yarn start`
