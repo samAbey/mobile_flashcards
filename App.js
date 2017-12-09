@@ -5,7 +5,6 @@ import { TabNavigator, StackNavigator } from 'react-navigation';
 import AddDeck from './components/add-decks/add-decks';
 import Decks from './components/decks/decks';
 import CleanDecks from './components/clean-decks/clean-decks';
-
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import reducers from './redux/reducers';
@@ -13,6 +12,7 @@ import thunk from 'redux-thunk';
 import Deck from './components/deck/deck';
 import AddCard from './components/add-card/add-card';
 import Quiz from './components/quiz/quiz';
+import { setLocalNotification } from './utils/helpers';
 
 
 import { DECK_KEY, setUpAsyncStorage } from './utils/helpers';
@@ -54,6 +54,10 @@ const store = createStore(reducers, applyMiddleware(thunk))
 
 
 export default class App extends React.Component {
+
+  componentDidMount () {
+    setLocalNotification () 
+  }
 
   render() {
     

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Card from './card';
+import { clearLocalNotification,setLocalNotification } from '../../utils/helpers';
 
 class Quiz extends React.Component {
 
@@ -30,6 +31,7 @@ class Quiz extends React.Component {
             this.setState({
                 showScore: true
             });
+            clearLocalNotification ().then(setLocalNotification());
         }
         if (answer) {
             this.setState(state=>({
