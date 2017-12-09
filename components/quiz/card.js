@@ -2,7 +2,8 @@ import React from 'react';
 import { 
     View, 
     Text,
-    TouchableOpacity
+    TouchableOpacity,
+    StyleSheet
 } from 'react-native';
 
 class Card extends React.Component {
@@ -24,28 +25,27 @@ class Card extends React.Component {
     }
 
     render () {
-        console.log(this.props.question)
         return (
-            this.state.currentView==='question'?<View>
-                <Text>{this.props.question.question}</Text>
-                <View>
+            this.state.currentView==='question'?<View style={styles.container}>
+                <Text style={styles.question}>{this.props.question.question}</Text>
+                <View style={styles.containerControllers}>
 
                     <TouchableOpacity onPress={this.changeView}>
-                        <Text>Answer</Text>
+                        <Text style={styles.answerBtn}>Answer</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={()=>{this.props.nextQuestion(true)}}>
-                        <Text>Correct</Text>
+                    <TouchableOpacity onPress={()=>{this.props.nextQuestion(true)}} style={styles.correctBtn}>
+                        <Text style={styles.correctBtnText}>Correct</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={()=>{this.props.nextQuestion(false)}}>
-                        <Text>Incorrect</Text>
+                    <TouchableOpacity onPress={()=>{this.props.nextQuestion(false)}} style={styles.incorrectBtn}>
+                        <Text style={styles.incorrectBtnText}>Incorrect</Text>
                     </TouchableOpacity>
                 </View>
-            </View>:<View>
-                <Text>{this.props.question.answer}</Text>
+            </View>:<View style={styles.containerAnswer}>
+                <Text style={styles.answer}>{this.props.question.answer}</Text>
                 <TouchableOpacity onPress={this.changeView}>
-                    <Text>Question</Text>
+                    <Text style={styles.questionBtn}>Question</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -53,3 +53,63 @@ class Card extends React.Component {
 }
 
 export default Card;
+
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    containerControllers: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    containerAnswer:{
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    question: {
+        fontSize: 32,
+        marginBottom: 20,
+        textAlign: 'center'
+    },
+    answer: {
+        fontSize: 32,
+        marginBottom: 20,
+        textAlign: 'center'
+    },
+    answerBtn: {
+        color: 'blue',
+        fontSize: 20
+    },
+    questionBtn: {
+        color: 'blue',
+        fontSize: 20
+    },
+    correctBtn: {
+        backgroundColor: '#45a058',
+        paddingTop: 20,
+        paddingRight: 50,
+        paddingBottom: 20,
+        paddingLeft: 50,
+        marginTop: 10,
+        marginBottom: 10
+    },
+    correctBtnText: {
+        color: '#fff'
+    },
+    incorrectBtn: {
+        backgroundColor: 'red',
+        paddingTop: 20,
+        paddingRight: 50,
+        paddingBottom: 20,
+        paddingLeft: 50,
+        marginTop: 10,
+        marginBottom: 10
+    },
+    incorrectBtnText: {
+        color: '#fff'
+    },
+
+});

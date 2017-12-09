@@ -6,21 +6,19 @@ import {
     AsyncStorage,
     TouchableOpacity } from 'react-native';
 import { DECK_KEY } from '../../utils/helpers';
-
 import { getAllDecks } from '../../redux/actions/decks';
 import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation';
 
 class CleanDecks extends React.Component {
-
-    
 
     deleteAllDecks = () => {
         const {getAllDecks} = this.props;
         AsyncStorage.removeItem(DECK_KEY, () => {
             AsyncStorage.getItem(DECK_KEY).then(function (value) {
-                console.log(value)
                 getAllDecks({});
             }).done();
+            this.props.navigation.dispatch(NavigationActions.back())
         }).done();
     }
 

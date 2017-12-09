@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import Card from './card';
 
 class Quiz extends React.Component {
@@ -16,12 +16,16 @@ class Quiz extends React.Component {
         }
     }
 
+    static navigationOptions = ({navigation}) => ({
+        title: 'Score'
+    });
+
     nextQuestion = (answer) => {
         if (this.state.currentQuestionIndex < this.state.questions.length-1) {
             this.setState((state) => ({
                 currentQuestion: state.questions[state.currentQuestionIndex+1],
                 currentQuestionIndex:  state.currentQuestionIndex + 1
-            }))
+            }));
         } else {
             this.setState({
                 showScore: true
@@ -40,14 +44,26 @@ class Quiz extends React.Component {
         const {deck} = this.props.navigation.state.params;
         
         return (
-            !this.state.showScore?<View>
+            !this.state.showScore?<View style={styles.container}>
                 <Card nextQuestion={this.nextQuestion} question={this.state.currentQuestion}></Card>
-            </View>:<View>
-                <Text>Score</Text>
-                <Text>{this.state.score} / {this.state.questions.length}</Text>
+            </View>:<View style={styles.container}>
+                <Text style={styles.scoreText}>Score</Text>
+                <Text style={styles.scoreText}>{this.state.score} / {this.state.questions.length}</Text>
             </View>
         );
     }
 }
 
 export default Quiz;
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    scoreText: {
+        fontSize: 32,
+        marginBottom: 20
+    }
+});

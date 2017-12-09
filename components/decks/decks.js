@@ -7,12 +7,8 @@ import {
     StyleSheet,
     TouchableOpacity,
     FlatList
-} from 'react-native';
-
-
-import { connect } from 'react-redux';
+} from 'react-native';import { connect } from 'react-redux';
 import { getAllDecks } from '../../redux/actions/decks';
-
 import { Entypo } from '@expo/vector-icons';
 import { DECK_KEY } from '../../utils/helpers';
 
