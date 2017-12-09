@@ -81,7 +81,8 @@ const styles = StyleSheet.create({
     },
     answerBtn: {
         color: 'blue',
-        fontSize: 20
+        fontSize: 20,
+        marginBottom: 40
     },
     questionBtn: {
         color: 'blue',

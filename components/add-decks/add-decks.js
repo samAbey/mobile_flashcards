@@ -15,6 +15,10 @@ import { NavigationActions } from 'react-navigation';
 
 class AddDecks extends React.Component {
 
+    static navigationOptions = {
+        tabBarLabel: 'New Deck'
+    }
+
     state = {
         deckName: "",
         deckAlreadyExsists: false

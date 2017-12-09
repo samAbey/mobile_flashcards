@@ -12,6 +12,10 @@ import { NavigationActions } from 'react-navigation';
 
 class CleanDecks extends React.Component {
 
+    static navigationOptions = {
+        tabBarLabel: 'Remove Decks'
+    }
+
     deleteAllDecks = () => {
         const {getAllDecks} = this.props;
         AsyncStorage.removeItem(DECK_KEY, () => {

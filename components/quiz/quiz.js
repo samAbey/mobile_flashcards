@@ -17,7 +17,7 @@ class Quiz extends React.Component {
     }
 
     static navigationOptions = ({navigation}) => ({
-        title: 'Score'
+        title: 'Quiz'
     });
 
     nextQuestion = (answer) => {
@@ -45,10 +45,13 @@ class Quiz extends React.Component {
         
         return (
             !this.state.showScore?<View style={styles.container}>
+
+                <Text style={styles.numberOfCards}>Card {this.state.currentQuestionIndex+1} of {this.state.questions.length}</Text>
                 <Card nextQuestion={this.nextQuestion} question={this.state.currentQuestion}></Card>
             </View>:<View style={styles.container}>
                 <Text style={styles.scoreText}>Score</Text>
-                <Text style={styles.scoreText}>{this.state.score} / {this.state.questions.length}</Text>
+                <Text>{this.state.score} / {this.state.questions.length} corect answers</Text>
+                <Text>Score: {(this.state.score / this.state.questions.length)*100}%</Text>
             </View>
         );
     }
@@ -65,5 +68,8 @@ const styles = StyleSheet.create({
     scoreText: {
         fontSize: 32,
         marginBottom: 20
+    },
+    numberOfCards: {
+       marginTop: 20 
     }
 });

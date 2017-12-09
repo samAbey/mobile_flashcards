@@ -21,6 +21,10 @@ class AddCard extends React.Component {
         answerText: ''
     }
 
+    static navigationOptions = ({navigation}) => ({
+        title: 'Add Card'
+    });
+
     handleQuestionChange = (text) => {
         this.setState ({
             questionText: text
